@@ -17,11 +17,11 @@ public class WeatherService {
     private TemperatureService temperatureService;
 
 
-    public String getTemperature(String city) {
+    public double getTemperature(String city) {
         City cityObj = cityRepository.findByName(city);
         double lat = cityObj.getLat();
         double lon = cityObj.getLon();
-        String temperature = temperatureService.getTemperature(lat, lon);
+        double temperature = temperatureService.getTemperature(lat, lon);
         return temperature;
     }
 }

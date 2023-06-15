@@ -25,9 +25,12 @@ public class MainController {
 
     @GetMapping("/weather/{city}")
     public ResponseEntity<String> getTemperature(@PathVariable("city") String city) {
-        String temperature = weatherService.getTemperature(city);
+        try {
+        String temperature = String.valueOf(weatherService.getTemperature(city));
         return ResponseEntity.ok(temperature);
+        } catch(Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
-
 
 }
