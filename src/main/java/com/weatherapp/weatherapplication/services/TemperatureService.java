@@ -1,44 +1,11 @@
 package com.weatherapp.weatherapplication.services;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
+public interface TemperatureService {
 
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
-
-@Service
-public class TemperatureService {
-
-    @Value("${apiKey}")
-    private String apiKey;
-
-    public double getTemperature(double lat, double lon) {
-        try {
-            RestTemplate restTemplate = new RestTemplate();
-            String url = "http://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={apiKey}";
-            Map<String, String> params = new HashMap<>();
-            params.put("lat", Double.toString(lat));
-            params.put("lon", Double.toString(lon));
-            params.put("apiKey", apiKey);
-            ResponseEntity<String> responseEntity = restTemplate.getForEntity(url, String.class, params);
-            String weatherData = responseEntity.getBody();
-            ObjectMapper mapper = new ObjectMapper();
-            JsonNode node = mapper.readTree(weatherData);
-            Double temperatureKel = node.get("main").get("temp").asDouble();
-            Double temperatureCls = temperatureKel-273;
-
-            return temperatureCls;
-
-            } catch (IOException e) {
-            throw new RuntimeException("Error getting weather data", e);
-        }
-    }
+    public  double getTemperatureFromAllData(String weatherData);
 }
+//56b30cb255.3443075 - токен гисметео   https://api.gismeteo.net/v2/weather/current/?latitude=54.35&longitude=52.52
 
+//2e934e98-a0b4-44e8-8f6f-829321eb075e - токен яндекса
 
+//c49de9ec5f3294ceedfb67923fd8f026 - токен OpenW
