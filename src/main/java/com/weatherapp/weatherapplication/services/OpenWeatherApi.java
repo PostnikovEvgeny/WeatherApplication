@@ -2,12 +2,18 @@ package com.weatherapp.weatherapplication.services;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -17,16 +23,20 @@ import java.net.URI;
 import java.util.HashMap;
 import java.util.Map;
 
-@Service
+//@Service
 public class OpenWeatherApi implements WeatherApi{
+
     @Autowired
     private RestTemplate restTemplate;
 
     //@Value("${apiOpenWeatherKey}")
-    //String apiKey = "c49de9ec5f3294ceedfb67923fd8f026";
+    //private String apiKey;
 
-    //public static String urlApi ="https://api.weather.yandex.ru/v2/forecast?lat={lat}&lon={lon}";
-    //String urlApi = "http://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={apiKey}";
+
+    public OpenWeatherApi(RestTemplate restTemplate) {
+        this.restTemplate = restTemplate;
+    }
+
     @Override
     public String getWeatherDataFromApi(double lat, double lon) {
         String apiKey = "c49de9ec5f3294ceedfb67923fd8f026";
@@ -35,10 +45,8 @@ public class OpenWeatherApi implements WeatherApi{
         params.put("lat", Double.toString(lat));
         params.put("lon", Double.toString(lon));
         params.put("apiKey", apiKey);
-        RestTemplate restTemplate1 = new RestTemplate();
-        ResponseEntity<String> responseEntity = restTemplate1.getForEntity(urlApi, String.class, params);
+        ResponseEntity<String> responseEntity = restTemplate.getForEntity(urlApi, String.class, params);
         String weatherData = responseEntity.getBody();
-        System.out.println(weatherData);
         return weatherData;
     }
 
@@ -56,6 +64,8 @@ public class OpenWeatherApi implements WeatherApi{
             throw new RuntimeException("Error getting temperature from OpenWeatherApi", e);
         }
     }
+
+
 
 
 }

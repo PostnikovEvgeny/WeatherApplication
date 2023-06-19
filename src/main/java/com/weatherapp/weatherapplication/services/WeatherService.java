@@ -1,6 +1,7 @@
 package com.weatherapp.weatherapplication.services;
 
 import com.weatherapp.weatherapplication.models.City;
+import org.springframework.stereotype.Service;
 
 public interface WeatherService {
 

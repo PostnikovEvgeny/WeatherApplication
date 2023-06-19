@@ -1,3 +1,4 @@
+/*
 package com.weatherapp.weatherapplication.services;
 
 public interface TemperatureService {
@@ -8,4 +9,4 @@ public interface TemperatureService {
 
 //2e934e98-a0b4-44e8-8f6f-829321eb075e - токен яндекса
 
-//c49de9ec5f3294ceedfb67923fd8f026 - токен OpenW
+//c49de9ec5f3294ceedfb67923fd8f026 - токен OpenW*/

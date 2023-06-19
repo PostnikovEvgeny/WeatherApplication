@@ -1,3 +1,4 @@
+/*
 package com.weatherapp.weatherapplication.services.impl;
 
 import com.weatherapp.weatherapplication.services.DataFromApiService;
@@ -23,7 +24,8 @@ public class DataFromApiServiceImpl implements DataFromApiService {
 
     //@Autowired
     //private RestTemplate restTemplate;
-    /*@Override
+    */
+/*@Override
     public String getDataFromApi(String apiKey, double lat, double lon) {
         //String url = "http://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={apiKey}";
         String urlApi = "https://api.weather.yandex.ru/v2/forecast?lat={lat}&lon={lon}";
@@ -40,12 +42,16 @@ public class DataFromApiServiceImpl implements DataFromApiService {
 
         HttpEntity entity = new HttpEntity(headers);
 
-        *//*ResponseEntity<String> responseEntity = restTemplate.exchange(
+        *//*
+*/
+/*ResponseEntity<String> responseEntity = restTemplate.exchange(
                 url,
                 HttpMethod.GET,
                 entity,
                 String.class
         );*//*
+*/
+/*
 
 
         //Map<String, String> params = new HashMap<>();
@@ -56,5 +62,7 @@ public class DataFromApiServiceImpl implements DataFromApiService {
         String weatherData = responseEntity.getBody();
         System.out.println(weatherData);
         return weatherData;
-    }*/
+    }*//*
+
 }
+*/

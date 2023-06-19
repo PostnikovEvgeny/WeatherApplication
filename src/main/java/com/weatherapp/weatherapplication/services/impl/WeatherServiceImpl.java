@@ -4,16 +4,12 @@ import com.weatherapp.weatherapplication.models.City;
 import com.weatherapp.weatherapplication.repository.CityRepository;
 import com.weatherapp.weatherapplication.services.WeatherApi;
 import com.weatherapp.weatherapplication.services.WeatherService;
-import com.weatherapp.weatherapplication.services.impl.TemperatureServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 @Service
 public class WeatherServiceImpl implements WeatherService {
-
-    /*@Value("${apiKey}")
-    private String apiKey;*/
 
     @Autowired
     private CityRepository cityRepository;

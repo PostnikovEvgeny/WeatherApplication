@@ -16,23 +16,27 @@ import org.springframework.web.util.UriComponentsBuilder;
 import java.io.IOException;
 import java.net.URI;
 
-@Service
+//@Service
 public class YandexApi implements WeatherApi{
 
     @Autowired
     private RestTemplate restTemplate;
 
+    public YandexApi(RestTemplate restTemplate) {
+        this.restTemplate = restTemplate;
+    }
+
     //@Value("${apiYandexKey}")
-    //String apiKey="api2e934e98-a0b4-44e8-8f6f-829321eb075e";
+    //String apiKey;
     @Override
     public String getWeatherDataFromApi(double lat, double lon) {
         String urlApi ="https://api.weather.yandex.ru/v2/forecast?lat={lat}&lon={lon}";
         URI url = UriComponentsBuilder.fromHttpUrl(urlApi).build(lat, lon);
+        String apiKey = "2e934e98-a0b4-44e8-8f6f-829321eb075e";
         HttpHeaders headers = new HttpHeaders();
-        headers.add("X-Yandex-API-Key", "2e934e98-a0b4-44e8-8f6f-829321eb075e");//apiKey);
-        RestTemplate restTemplate1 = new RestTemplate();
+        headers.add("X-Yandex-API-Key", apiKey);
         HttpEntity entity = new HttpEntity(headers);
-        ResponseEntity<String> responseEntity = restTemplate1.exchange(
+        ResponseEntity<String> responseEntity = restTemplate.exchange(
                 url,
                 HttpMethod.GET,
                 entity,
@@ -40,7 +44,6 @@ public class YandexApi implements WeatherApi{
         );
 
         String weatherData = responseEntity.getBody();
-        //System.out.println(weatherData);
         return weatherData;
     }
     public double getTemperature(String weatherData){

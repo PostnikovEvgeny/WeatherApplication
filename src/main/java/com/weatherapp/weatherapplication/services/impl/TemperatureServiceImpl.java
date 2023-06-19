@@ -1,3 +1,4 @@
+/*
 package com.weatherapp.weatherapplication.services.impl;
 
 import com.fasterxml.jackson.databind.JsonNode;
@@ -35,5 +36,6 @@ public class TemperatureServiceImpl implements TemperatureService {
     }
 
 }
+*/
 
 
