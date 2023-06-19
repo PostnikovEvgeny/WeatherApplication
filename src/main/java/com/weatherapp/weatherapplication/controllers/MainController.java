@@ -16,7 +16,6 @@ public class MainController {
 
     @Autowired
     private WeatherServiceImpl weatherServiceImpl;
-
     @Autowired
     private WeatherApi weatherApi;
     @Autowired
