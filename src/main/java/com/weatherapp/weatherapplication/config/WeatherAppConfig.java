@@ -31,6 +31,5 @@ public class WeatherAppConfig {
     public WeatherApi weatherApi(){
         return new OpenWeatherApi(restTemplate());
     }
-    //WeatherApi weatherApi = new OpenWeatherApi(restTemplate());
 
 }

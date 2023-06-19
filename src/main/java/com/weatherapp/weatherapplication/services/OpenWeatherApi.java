@@ -31,8 +31,6 @@ public class OpenWeatherApi implements WeatherApi{
 
     @Value("${apiOpenWeatherKey}")
     private String apiKey;
-
-
     public OpenWeatherApi(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
     }
@@ -63,8 +61,5 @@ public class OpenWeatherApi implements WeatherApi{
             throw new RuntimeException("Error getting temperature from OpenWeatherApi", e);
         }
     }
-
-
-
 
 }
