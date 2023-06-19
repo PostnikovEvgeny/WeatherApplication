@@ -28,7 +28,4 @@ public class WeatherAppConfig {
         return new OpenWeatherApi(restTemplate());
     }
 
-
-    //https://csharpcoderr.com/5539/
-
 }

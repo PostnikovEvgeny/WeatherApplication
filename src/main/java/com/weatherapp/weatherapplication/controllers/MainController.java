@@ -31,11 +31,10 @@ public class MainController {
     }
 
     @GetMapping("/weather/Yandex/{city}")
-    public ResponseEntity<String> getTemperatureYand(@PathVariable("city") String city) {
+    public ResponseEntity<String> getTemperatureYandex(@PathVariable("city") String city) {
         try {
-            //YandexApi weatherApi = new YandexApi();
-        String temperature = String.valueOf(weatherServiceImpl.getTemperatureFromCity(yandexApi, city));
-        return ResponseEntity.ok(temperature);
+            String temperature = String.valueOf(weatherServiceImpl.getTemperatureFromCity(yandexApi, city));
+            return ResponseEntity.ok(temperature);
         } catch(Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
@@ -43,7 +42,6 @@ public class MainController {
     @GetMapping("/weather/OpenWeather/{city}")
     public ResponseEntity<String> getTemperatureOW(@PathVariable("city") String city) {
         try {
-            //OpenWeatherApi weatherApi = new OpenWeatherApi();
             String temperature = String.valueOf(weatherServiceImpl.getTemperatureFromCity(openWeatherApi, city));
             return ResponseEntity.ok(temperature);
         } catch(Exception e) {
