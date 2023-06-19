@@ -29,8 +29,8 @@ public class OpenWeatherApi implements WeatherApi{
     @Autowired
     private RestTemplate restTemplate;
 
-    //@Value("${apiOpenWeatherKey}")
-    //private String apiKey;
+    @Value("${apiOpenWeatherKey}")
+    private String apiKey;
 
 
     public OpenWeatherApi(RestTemplate restTemplate) {
@@ -39,7 +39,6 @@ public class OpenWeatherApi implements WeatherApi{
 
     @Override
     public String getWeatherDataFromApi(double lat, double lon) {
-        String apiKey = "c49de9ec5f3294ceedfb67923fd8f026";
         String urlApi = "http://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={apiKey}";
         Map<String, String> params = new HashMap<>();
         params.put("lat", Double.toString(lat));

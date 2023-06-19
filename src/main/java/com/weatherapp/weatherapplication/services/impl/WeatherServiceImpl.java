@@ -14,14 +14,6 @@ public class WeatherServiceImpl implements WeatherService {
     @Autowired
     private CityRepository cityRepository;
 
-   // @Autowired
-    //private TemperatureServiceImpl temperatureServiceImpl;
-
-   // @Autowired
-    //private DataFromApiServiceImpl dataFromApiServiceImpl;
-
-    //@Autowired
-    //WeatherApi weatherApi;
 
 
     public double getTemperatureFromCity(WeatherApi weatherApi, String city) {

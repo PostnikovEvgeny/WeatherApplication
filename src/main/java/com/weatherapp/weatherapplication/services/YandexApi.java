@@ -26,13 +26,13 @@ public class YandexApi implements WeatherApi{
         this.restTemplate = restTemplate;
     }
 
-    //@Value("${apiYandexKey}")
-    //String apiKey;
+    @Value("${apiYandexKey}")
+    String apiKey;
     @Override
     public String getWeatherDataFromApi(double lat, double lon) {
         String urlApi ="https://api.weather.yandex.ru/v2/forecast?lat={lat}&lon={lon}";
         URI url = UriComponentsBuilder.fromHttpUrl(urlApi).build(lat, lon);
-        String apiKey = "2e934e98-a0b4-44e8-8f6f-829321eb075e";
+        //String apiKey = "2e934e98-a0b4-44e8-8f6f-829321eb075e";
         HttpHeaders headers = new HttpHeaders();
         headers.add("X-Yandex-API-Key", apiKey);
         HttpEntity entity = new HttpEntity(headers);
