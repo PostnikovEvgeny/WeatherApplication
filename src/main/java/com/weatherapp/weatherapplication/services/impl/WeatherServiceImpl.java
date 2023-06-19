@@ -5,7 +5,6 @@ import com.weatherapp.weatherapplication.repository.CityRepository;
 import com.weatherapp.weatherapplication.services.WeatherApi;
 import com.weatherapp.weatherapplication.services.WeatherService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 @Service
