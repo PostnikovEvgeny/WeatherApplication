@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
 @Controller
 public class MainController {
@@ -16,13 +17,12 @@ public class MainController {
     @Autowired
     private WeatherServiceImpl weatherServiceImpl;
 
-    //@Autowired
-    //private WeatherApi weatherApi;
     @Autowired
-    YandexApi yandexApi;
-
+    private WeatherApi weatherApi;
     @Autowired
-    OpenWeatherApi openWeatherApi;
+    private YandexApi yandexApi;
+    @Autowired
+    private OpenWeatherApi openWeatherApi;
 
     @GetMapping("/")
     public String greeting(Model model) {
@@ -43,6 +43,15 @@ public class MainController {
     public ResponseEntity<String> getTemperatureOW(@PathVariable("city") String city) {
         try {
             String temperature = String.valueOf(weatherServiceImpl.getTemperatureFromCity(openWeatherApi, city));
+            return ResponseEntity.ok(temperature);
+        } catch(Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+    @GetMapping("/weather/{city}")
+    public ResponseEntity<String> getTemperatureDefault(@PathVariable("city") String city) {
+        try {
+            String temperature = String.valueOf(weatherServiceImpl.getTemperatureFromCity(weatherApi, city));
             return ResponseEntity.ok(temperature);
         } catch(Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());

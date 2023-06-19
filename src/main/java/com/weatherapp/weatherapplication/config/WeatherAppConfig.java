@@ -27,5 +27,10 @@ public class WeatherAppConfig {
     public OpenWeatherApi openWeatherApi(){
         return new OpenWeatherApi(restTemplate());
     }
+    @Bean
+    public WeatherApi weatherApi(){
+        return new OpenWeatherApi(restTemplate());
+    }
+    //WeatherApi weatherApi = new OpenWeatherApi(restTemplate());
 
 }
