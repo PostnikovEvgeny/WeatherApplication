@@ -19,16 +19,17 @@ public class WeatherAppConfig {
      return new RestTemplateBuilder().build();
    }
 
+   // @Bean
+  //  public YandexApi yandexApi(){
+ //       return new YandexApi(restTemplate());
+ //   }
+   // @Bean
+   // public OpenWeatherApi openWeatherApi(){
+   //     return new OpenWeatherApi(restTemplate());
+    //}
     @Bean
-    public YandexApi yandexApi(){
-        return new YandexApi(restTemplate());
-    }
-    @Bean
-    public OpenWeatherApi openWeatherApi(){
+    public WeatherApi weatherApi(){
         return new OpenWeatherApi(restTemplate());
     }
-
-
-    //https://csharpcoderr.com/5539/
 
 }
