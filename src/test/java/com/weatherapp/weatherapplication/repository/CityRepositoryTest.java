@@ -4,10 +4,7 @@ import com.weatherapp.weatherapplication.models.City;
 import org.aspectj.lang.annotation.Before;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.mockito.MockitoAnnotations;
+import org.mockito.*;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,16 +22,16 @@ class CityRepositoryTest {
     private CityRepository cityRepository;
 
     @Test
-    void findByNameTest() throws Exception{
-
+    void findByNameTest(){
         City city = cityRepository.findByName("Perm");
-        assertThat(city.getName()=="Perm");
+        String name = city.getName();
+        assertEquals("Perm", name);
     }
 
     @Test
-    public void testInvalidCity() throws Exception{
-        City city = cityRepository.findByName("Perm");
-        assertThat(city.getName() == null);
+    public void testInvalidCity(){
+        City city = cityRepository.findByName("123");
+        assertTrue(city == null);
     }
 
 }

@@ -17,10 +17,15 @@ public class WeatherServiceImpl implements WeatherService {
 
     public double getTemperatureFromCity(WeatherApi weatherApi, String city) {
         City cityObj = cityRepository.findByName(city);
-        double lat = cityObj.getLat();
-        double lon = cityObj.getLon();
-        String weatherData = weatherApi.getWeatherDataFromApi(lat,lon);
-        double temperature = weatherApi.getTemperature(weatherData);
-        return temperature;
+        if(cityObj != null) {
+            double lat = cityObj.getLat();
+            double lon = cityObj.getLon();
+            String weatherData = weatherApi.getWeatherDataFromApi(lat, lon);
+            double temperature = weatherApi.getTemperature(weatherData);
+            return temperature;
+        }
+        else {
+            throw new IllegalArgumentException("There is no such city in DB");
+        }
     }
 }

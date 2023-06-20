@@ -37,7 +37,6 @@ public class OpenWeatherApi implements WeatherApi{
     @Override
     public double getTemperature(String weatherData) {
         try {
-
             ObjectMapper mapper = new ObjectMapper();
             JsonNode node = mapper.readTree(weatherData);
             Double temperatureKel = node.get("main").get("temp").asDouble();
