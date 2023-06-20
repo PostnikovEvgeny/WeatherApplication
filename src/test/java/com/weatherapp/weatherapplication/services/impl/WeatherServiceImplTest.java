@@ -3,6 +3,7 @@ package com.weatherapp.weatherapplication.services.impl;
 import com.weatherapp.weatherapplication.repository.CityRepository;
 import com.weatherapp.weatherapplication.services.OpenWeatherApi;
 import com.weatherapp.weatherapplication.services.WeatherApi;
+import com.weatherapp.weatherapplication.services.YandexApi;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
@@ -18,21 +19,31 @@ import static org.mockito.Mockito.mock;
 @SpringBootTest
 class WeatherServiceImplTest {
 
+/*
     @MockBean
     private CityRepository cityRepository;
+*/
 
     @MockBean
     private WeatherServiceImpl weatherService;
-    @MockBean
-    private WeatherApi weatherApi;
+   // @MockBean
+    @Mock
+    private OpenWeatherApi openWeather;
+    @Mock
+    private YandexApi yandexApi;
 
     /*public WeatherServiceImplTest(){
         this.weatherService = new WeatherServiceImpl();
     }*/
     @Test
     void gettingTempFromCityOW() {
-        //WeatherApi weatherApi = mock(OpenWeatherApi.class);
-        double temp = weatherService.getTemperatureFromCity(weatherApi,"Perm");
-        assertEquals(temp,weatherService.getTemperatureFromCity(weatherApi,"Perm"));
+        double temp = weatherService.getTemperatureFromCity(openWeather,"Perm");
+       //assertEquals(temp,weatherService.getTemperatureFromCity(openWeather,"Perm"));
+        Mockito.when(weatherService.getTemperatureFromCity(openWeather,"Perm")).thenReturn(temp);
+    }
+    @Test
+    void gettingTempFromCityYandex() {
+        double temp = weatherService.getTemperatureFromCity(yandexApi,"Perm");
+        assertEquals(temp,weatherService.getTemperatureFromCity(yandexApi,"Perm"));
     }
 }
