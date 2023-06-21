@@ -24,8 +24,8 @@ class CityRepositoryTest {
     @Test
     void findByNameTest(){
         City city = cityRepository.findByName("Perm");
-        String name = city.getName();
-        assertEquals("Perm", name);
+        String name = "Perm";
+        assertEquals(city.getName(), name);
     }
 
     @Test

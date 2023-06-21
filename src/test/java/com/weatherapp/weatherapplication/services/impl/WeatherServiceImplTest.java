@@ -7,6 +7,7 @@ import com.weatherapp.weatherapplication.services.WeatherApi;
 import com.weatherapp.weatherapplication.services.YandexApi;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.Spy;
@@ -21,13 +22,16 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.anyDouble;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 @SpringBootTest
 class WeatherServiceImplTest {
 
-    @Mock
+    @InjectMocks
     private WeatherServiceImpl weatherService;
+    @Mock
+    private CityRepository cityRepository;
     @Mock
     private OpenWeatherApi openWeather;
     @Mock
@@ -35,13 +39,18 @@ class WeatherServiceImplTest {
 
     @Test
     void gettingTempFromCityOW() {
-        Mockito.doReturn(10d).when(weatherService).getTemperatureFromCity(openWeather,"Perm"); //еще можно так Mockito.when(weatherService.getTemperatureFromCity(openWeather,"Perm")).thenReturn(10d);
-        assertEquals(10d, weatherService.getTemperatureFromCity(openWeather,"Perm"));
-        Mockito.verify(weatherService).getTemperatureFromCity(openWeather,"Perm");
+        String city = "Perm";
+        City cityObj = new City(1l,"Perm", 58.0174, 56.2855);
+        when(cityRepository.findByName(city)).thenReturn(cityObj);
+        String weatherData = "Weather data for Perm";
+        when(openWeather.getWeatherDataFromApi(58.0174, 56.2855)).thenReturn(weatherData);
+        double temperature = 10.5;
+        when(openWeather.getTemperature(weatherData)).thenReturn(temperature);
+        double result = weatherService.getTemperatureFromCity(openWeather, city);
+        assertEquals(result, temperature, 0.1);
     }
     @Test
     void gettingTempFromIllegalCityOW() {
-        Mockito.doThrow(IllegalArgumentException.class).when(weatherService).getTemperatureFromCity(openWeather,"123");
         assertThrows(IllegalArgumentException.class,
                 () -> {
                     weatherService.getTemperatureFromCity(openWeather,"123");
@@ -50,13 +59,18 @@ class WeatherServiceImplTest {
 
     @Test
     void gettingTempFromCityYandex() {
-        Mockito.doReturn(10d).when(weatherService).getTemperatureFromCity(yandexApi,"Perm"); //еще можно так Mockito.when(weatherService.getTemperatureFromCity(yandexApi,"Perm")).thenReturn(10d);
-        assertEquals(10d, weatherService.getTemperatureFromCity(yandexApi,"Perm"));
-        Mockito.verify(weatherService).getTemperatureFromCity(yandexApi,"Perm");
+        String city = "Perm";
+        City cityObj = new City(1l,"Perm", 58.0174, 56.2855);
+        when(cityRepository.findByName(city)).thenReturn(cityObj);
+        String weatherData = "Weather data for Perm";
+        when(yandexApi.getWeatherDataFromApi(58.0174, 56.2855)).thenReturn(weatherData);
+        double temperature = 10.5;
+        when(yandexApi.getTemperature(weatherData)).thenReturn(temperature);
+        double result = weatherService.getTemperatureFromCity(yandexApi, city);
+        assertEquals(result, temperature, 0.1);
     }
     @Test
     void gettingTempFromIllegalCityYandex() {
-        Mockito.doThrow(IllegalArgumentException.class).when(weatherService).getTemperatureFromCity(yandexApi,"123");
         assertThrows(IllegalArgumentException.class,
                 () -> {
                     weatherService.getTemperatureFromCity(yandexApi,"123");

@@ -5,15 +5,12 @@ import com.weatherapp.weatherapplication.repository.CityRepository;
 import com.weatherapp.weatherapplication.services.WeatherApi;
 import com.weatherapp.weatherapplication.services.WeatherService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
-@Service
+
 public class WeatherServiceImpl implements WeatherService {
 
     @Autowired
     private CityRepository cityRepository;
-
-
 
     public double getTemperatureFromCity(WeatherApi weatherApi, String city) {
         City cityObj = cityRepository.findByName(city);

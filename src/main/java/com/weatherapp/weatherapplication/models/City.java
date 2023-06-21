@@ -1,5 +1,4 @@
 package com.weatherapp.weatherapplication.models;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -20,7 +19,5 @@ public class City {
     private String name;
     private double lat;
     private double lon;
-
-
 
 }

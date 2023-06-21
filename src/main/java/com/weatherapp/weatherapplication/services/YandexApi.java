@@ -16,7 +16,6 @@ import org.springframework.web.util.UriComponentsBuilder;
 import java.io.IOException;
 import java.net.URI;
 
-@Service
 public class YandexApi implements WeatherApi{
 
     @Autowired
