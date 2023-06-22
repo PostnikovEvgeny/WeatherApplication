@@ -19,13 +19,4 @@ public class WeatherAppConfig {
     public WeatherApi weatherApi(){
         return new OpenWeatherApi(restTemplate());
     }
-    @Bean
-    public OpenWeatherApi openWeatherApi(){return new OpenWeatherApi(restTemplate());}
-    @Bean
-    public YandexApi yandexApi(){return new YandexApi(restTemplate());}
-    @Bean
-    public WeatherServiceImpl weatherServiceImpl(){return new WeatherServiceImpl();}
-    @Bean
-    public ProviderDetectorService providerDetectorService(){return new ProviderDetectorService();}
-
 }
