@@ -41,14 +41,9 @@ public class MainController {
     public ResponseEntity<String> getTemperatureApi(@PathVariable("city") String city, @RequestParam(value = "provider", required = false) String provider) {
         try {
             City cityObj = cityRepository.findByName(city);
-            if(cityObj != null) {
-                weatherApi = providerDetectorService.DetectTheProvider(provider);
-                String temperature = String.valueOf(weatherServiceImpl.getTemperatureFromCity(weatherApi, cityObj));
-                return ResponseEntity.ok(temperature);
-            }
-            else {
-                throw new IllegalArgumentException("There is no such city in DB");
-            }
+            weatherApi = providerDetectorService.DetectTheProvider(provider);
+            String temperature = String.valueOf(weatherServiceImpl.getTemperatureFromCity(weatherApi, cityObj));
+            return ResponseEntity.ok(temperature);
         } catch(Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
@@ -57,14 +52,9 @@ public class MainController {
     public ResponseEntity<String> getAverageTempFromRegion(@PathVariable("region") String region, @RequestParam(value = "provider", required = false) String provider) {
         try {
             Region regionObj = regionRepository.findByName(region);
-            if(regionObj != null) {
-                weatherApi = providerDetectorService.DetectTheProvider(provider);
-                String AvgRegionTemp = String.valueOf(weatherServiceImpl.getAverageTemperatureFromRegion(weatherApi, regionObj));
-                return ResponseEntity.ok(AvgRegionTemp);
-            }
-            else {
-                    throw new IllegalArgumentException("There is no such region in DB");
-                }
+            weatherApi = providerDetectorService.DetectTheProvider(provider);
+            String AvgRegionTemp = String.valueOf(weatherServiceImpl.getAverageTemperatureFromRegion(weatherApi, regionObj));
+            return ResponseEntity.ok(AvgRegionTemp);
         } catch(Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
@@ -73,14 +63,10 @@ public class MainController {
     public ResponseEntity<String> getAverageTempFromCountry(@PathVariable("country") String country, @RequestParam(value = "provider", required = false) String provider) {
         try {
             Country countryObj = countryRepository.findByName(country);
-            if(countryObj != null) {
-                weatherApi = providerDetectorService.DetectTheProvider(provider);
-                String AvgCountryTemp = String.valueOf(weatherServiceImpl.getAverageTemperatureFromCountry(weatherApi, countryObj));
-                return ResponseEntity.ok(AvgCountryTemp);
-            }
-            else {
-                throw new IllegalArgumentException("There is no such country in DB");
-            }
+            weatherApi = providerDetectorService.DetectTheProvider(provider);
+            String AvgCountryTemp = String.valueOf(weatherServiceImpl.getAverageTemperatureFromCountry(weatherApi, countryObj));
+            return ResponseEntity.ok(AvgCountryTemp);
+
         } catch(Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }

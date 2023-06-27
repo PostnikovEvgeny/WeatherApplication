@@ -24,33 +24,49 @@ public class WeatherServiceImpl implements WeatherService {
     private CountryRepository countryRepository;
 
     public double getTemperatureFromCity(WeatherApi weatherApi, City city) {
-        double lat = city.getLat();
-        double lon = city.getLon();
-        String weatherData = weatherApi.getWeatherDataFromApi(lat, lon);
-        double temperature = weatherApi.getTemperature(weatherData);
-        return temperature;
+        if(city != null) {
+            double lat = city.getLat();
+            double lon = city.getLon();
+            String weatherData = weatherApi.getWeatherDataFromApi(lat, lon);
+            double temperature = weatherApi.getTemperature(weatherData);
+            return temperature;
+        }
+        else {
+            throw new IllegalArgumentException("There is no such city in DB");
+        }
     }
 
     @Override
     public double getAverageTemperatureFromRegion(WeatherApi weatherApi, Region region) {
-        List<City> cities = cityRepository.findAllByRegion_Id(region.getId());
-        double totalTemp=0.0;
-        for (var city:cities) {
-            totalTemp+=getTemperatureFromCity(weatherApi,city);
+        if(region != null) {
+            List<City> cities = cityRepository.findAllByRegion_Id(region.getId());
+            double totalTemp=0.0;
+            for (var city:cities) {
+                totalTemp+=getTemperatureFromCity(weatherApi,city);
+            }
+            double AvgTemp = totalTemp / cities.size();
+            return AvgTemp;
         }
-        double AvgTemp = totalTemp / cities.size();
-        return AvgTemp;
+        else {
+            throw new IllegalArgumentException("There is no such region in DB");
+        }
     }
 
     @Override
     public double getAverageTemperatureFromCountry(WeatherApi weatherApi, Country country) {
-        List<Region> regions = regionRepository.findAllByCountry_Id(country.getId());
-        double totalTemp=0.0;
-        for (var region:regions) {
-            totalTemp+=getAverageTemperatureFromRegion(weatherApi,region);
+        if(country != null) {
+            List<Region> regions = regionRepository.findAllByCountry_Id(country.getId());
+            double totalTemp=0.0;
+            for (var region:regions) {
+                totalTemp+=getAverageTemperatureFromRegion(weatherApi,region);
+            }
+            double AvgTemp = totalTemp / regions.size();
+            return AvgTemp;
         }
-        double AvgTemp = totalTemp / regions.size();
-        return AvgTemp;
+        else {
+            throw new IllegalArgumentException("There is no such country in DB");
+        }
     }
+
 
 }
