@@ -1,4 +1,4 @@
-package com.weatherapp.weatherapplication.models;
+package com.weatherapp.weatherapplication.DB.models;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

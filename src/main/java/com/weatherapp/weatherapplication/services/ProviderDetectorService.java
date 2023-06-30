@@ -12,7 +12,7 @@ public class ProviderDetectorService {
     @Autowired
     private OpenWeatherApi openWeatherApi;
 
-    public WeatherApi DetectTheProvider(String provider) {
+    public WeatherApi detectTheProvider(String provider) {
         switch (provider)
         {
             case "OpenWeather":
